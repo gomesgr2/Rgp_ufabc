@@ -101,31 +101,46 @@ void ItemDias(){
 //Sistema de Salvar (0 )
 void Carregar(){
    
-    char aux_str[100];
-    FILE *fp;
-    char c;
-    fp = fopen("Save.txt" , "r");
+    char aux_str[MAX_TAMANHO_DA_PALAVRA];
+
+    FILE *fpInfo;
+    int num = 0;
+   
+    fpInfo = fopen("Save.txt" , "r");
+   
     char att[6] = {'e', '&','s','z','d','a'};
+    char attInfo[6][MAX_TAMANHO_DA_PALAVRA] = {"Energia", "Estudo", "Social", "Saude", "Dinheiro","Dia Atual"};
 
-    printf("Carregando as informacoes......");
+    printf("Carregando as informacoes...... \n");
+    criarlinha(34);
 
-    if( fp == NULL){
-        printf("Erro na abertura do arquivo.\n");
+    if(fpInfo == NULL){
+        printf("Erro na abertura do arquivo -> não foi possível recuperar as informações salvas\n");
         return;
     } 
 
-    fscanf(fp,"%s",&protagonista.nome);
 
-    printf("Bem vindo de volta %s", protagonista.nome);
-
+    printf("Informaçoes salvas :");
 
 
-//     while((c = fscanf(fp, "%d", )) != EOF){
-//         int aux = 0;
-//         printf("%c", c);
-//    }
-    
-    protagonista.dia_atual = 1;
+
+    while(!feof(fpInfo)){
+        if(num == 0){
+            fgets(aux_str,MAX_TAMANHO_DA_PALAVRA, fpInfo);
+            strcpy(protagonista.nome , aux_str);
+            printf("Bem vindo de volta %s\n", protagonista.nome);
+
+        } else if (num > 0 && num < 7){
+            int info = atoi(fgets(aux_str,MAX_TAMANHO_DA_PALAVRA, fpInfo));
+            printf("%s : %d\n",attInfo[num - 1], info);
+            inserindoInfoDoProtagonista(att[num - 1], info);
+        } else {
+            break;
+        }
+        num ++;
+   }
+
+    fclose(fpInfo);
 
 
 }
@@ -146,24 +161,48 @@ int obtendoInfoDoProtagonista(char tipo){
             return protagonista.dia_atual;
     }
 }
+
+void inserindoInfoDoProtagonista(char tipo, int info){
+    switch(tipo) {
+        case 'e' :
+            protagonista.energia = info;
+        case '&' :
+            protagonista.estudo = info;
+        case 's' :
+            protagonista.social = info;
+        case 'z' :
+            protagonista.saude = info;
+        case 'd' :
+            protagonista.dinheiro = info;
+        default :
+            protagonista.dia_atual = info;
+    }
+
+}
+
+
 void Salvar(){
-    char aux_str[100];
-    FILE *fp;
+    char aux_str[MAX_TAMANHO_DA_PALAVRA];
+    FILE *fpInfo;
+
     char c;
-    fp = fopen("Save.txt" , "w");
+    
+    fpInfo = fopen("Save.txt" , "w");
+
+
     char att[6] = {'e', '&','s','z','d','a'};
 
-    if( fp == NULL){
+    if( fpInfo == NULL){
         printf("Erro na abertura do arquivo - Não foi possível salvar as informações\n");
         return;
     } 
 
-    fprintf(fp, protagonista.nome);
+    fprintf(fpInfo, protagonista.nome);
 
     for(int i =0; i < 6; i++){
-        fprintf(fp, strcat(itoa(obtendoInfoDoProtagonista(att[i]), aux_str, 10), "\n"));
+        fprintf(fpInfo, strcat(itoa(obtendoInfoDoProtagonista(att[i]), aux_str, 10), "\n"));
     }
-    fclose(fp);
+    fclose(fpInfo);
 }
 
 //Ações nos dias comuns
@@ -249,8 +288,6 @@ void passagemDasSemanas(int dia, char s){
             if (sair==1) {
                 break;
             }
-            
-            printf("%d",dia);
             printf("Voce esta no dia %d/7\n", dia);
             if (dia == 3 || dia == 7) {
                 Prova();
