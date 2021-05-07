@@ -540,35 +540,47 @@ void AcoesDias(){
 
     char s, n;
 
-    if(0<protagonista.energia && protagonista.energia<=10){
+
     printf("Responda com 's' caso voce tenha feito aquela acao ou 'n' caso voce nao tenha a feito: \n");
     printf("\n");
 
+    if(protagonista.energia>0){
     printf("Acoes relacionadas a saude: \n");
     printf("\n");
-    atividade(s,n);
-    agua(s,n);
-    sono(s,n);
 
+    atividade(s,n);}
+    if(protagonista.energia>0){
+    agua(s,n);}
+    if(protagonista.energia>0){
+    sono(s,n);}
+
+    if(protagonista.energia>0){
     printf("Acoes relacionadas ao dinheiro: \n");
     printf("\n");
-    compra(s,n);
-    gasto(s,n);
 
+    compra(s,n);}
+    if(protagonista.energia>0){
+    gasto(s,n);}
+
+    if(protagonista.energia>0){
     printf("Acoes relacionadas a vida social: \n");
     printf("\n");
-    mensagem(s,n);
-    redes(s,n);
 
+    mensagem(s,n);}
+    if(protagonista.energia>0){
+    redes(s,n);}
+
+    if(protagonista.energia>0){
     printf("Acoes relacionadas ao estudo: \n");
     printf("\n");
-    hoje(s,n);
-    curso(s,n);
-    meta(s,n);
- }else {
-     printf("Voce nao tem energia suficiente para realizar esta acao");
-     printf("Sem alteracao na pontuacao. \n");
-     }
+
+    hoje(s,n);}
+    if(protagonista.energia>0){
+    curso(s,n);}
+    if(protagonista.energia>0){
+    meta(s,n);} else{
+    printf("Voce nao tem energia suficiente para realizar mais acoes\n");
+    }
 
 }
 
