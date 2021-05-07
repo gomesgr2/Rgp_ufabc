@@ -251,6 +251,8 @@ void ItemDias(){
         ItemDias();
         break;
     }
+	
+	protagonista.energia--;
 
 }
 
@@ -553,6 +555,50 @@ void meta(){
 
 void AcoesDias(){
 
+    char s, n;
+
+
+    printf("Responda com 's' caso voce tenha feito aquela acao ou 'n' caso voce nao tenha a feito: \n");
+    printf("\n");
+
+    if(protagonista.energia>0){
+    printf("Acoes relacionadas a saude: \n");
+    printf("\n");
+
+    atividade(s,n);}
+    if(protagonista.energia>0){
+    agua(s,n);}
+    if(protagonista.energia>0){
+    sono(s,n);}
+
+    if(protagonista.energia>0){
+    printf("Acoes relacionadas ao dinheiro: \n");
+    printf("\n");
+
+    compra(s,n);}
+    if(protagonista.energia>0){
+    gasto(s,n);}
+
+    if(protagonista.energia>0){
+    printf("Acoes relacionadas a vida social: \n");
+    printf("\n");
+
+    mensagem(s,n);}
+    if(protagonista.energia>0){
+    redes(s,n);}
+
+    if(protagonista.energia>0){
+    printf("Acoes relacionadas ao estudo: \n");
+    printf("\n");
+
+    hoje(s,n);}
+    if(protagonista.energia>0){
+    curso(s,n);}
+    if(protagonista.energia>0){
+    meta(s,n);} else{
+    printf("Voce nao tem energia suficiente para realizar mais acoes\n");
+    }
+
 }
 
 
@@ -622,7 +668,7 @@ void Prova(int dia){
 void itemprova(){
     int aux;
 
-    if (qtd_itens(protagonista.listaitem) < 0) {
+    if (qtd_itens(protagonista.listaitem) <= 0) {
         printf("Voce nao tem nenhum item!\n");
     } else {
         ler_lista(protagonista.listaitem);
@@ -630,13 +676,132 @@ void itemprova(){
         printf("Que item voce quer utilizar?\n");
         fflush(stdin);
         scanf("%d", &aux);
-    
+
+        Item *no;
+	    no = *protagonista.listaitem;
+
+        for (int i = 0; i < aux; i++) {
+            if (no == NULL) {
+                break;
+            } else {
+                no = no->p;
+            }
+	    }
+
+        //if (no->palavra == "Cafe (+2 de energia)") {
         
+        if (strcmp(no->palavra, "Cafe (+2 de energia)") == 0) {
+            protagonista.energia += 3;
+            remover_elemento(protagonista.listaitem, "Cafe (+2 de energia)");
+        } else if (strcmp(no->palavra, "Barrinha de cereal (+5 de energia)") == 0) {
+            protagonista.energia += 6;
+            remover_elemento(protagonista.listaitem, "Barrinha de cereal (+5 de energia)");
+        } else if (strcmp(no->palavra, "Livro didatico (+3 de estudo)") == 0) {
+            protagonista.estudo += 3;
+            remover_elemento(protagonista.listaitem, "Livro didatico (+3 de estudo)");
+        } else if (strcmp(no->palavra, "Folha de resposta (+10 de ... estudo?)") == 0) {
+            protagonista.estudo += 10;
+            remover_elemento(protagonista.listaitem, "Folha de resposta (+10 de ... estudo?)");
+        } else {
+            printf("0");
+        }
+
+        printf("Voce usou o item! \n");
     }
 }
 
+int *selectionSort (int *vet, int N){
+    int i=0, j=0, menor=0, troca=0;
+
+    for(i=0;i<N-1;i++){
+        menor=i;
+        for(j=i+1;j<N;j++){
+            if(vet[j] < vet[menor]){
+                menor=j;
+            }
+        }
+        if(i!=menor){
+            troca=vet[i];
+            vet[i]=vet[menor];
+            vet[menor]=troca;
+
+        }
+    }
+    return vet;
+
+}
+
 void Final(){
+    criarlinha(34);
+    printf("Voce chegou ao FINAL do nosso jogo! \n");
+    printf("\n");
+    int vetor[4]={protagonista.saude, protagonista.dinheiro,protagonista.estudo, protagonista.social};
+
+    vetor[4]=selectionSort(vetor,4);
+
+    printf("Suas pontuacoes (da menor para maior) foram: ");
+    for(int i=0;i<4;i++){
+        printf("%i ",vetor[i]);
+    }
+    printf("\n");
+    printf("Sendo %d pontos em relacao a sua SAUDE, %d pontos em relacao ao seu DINHEIRO, %d pontos em relacao ao seu ESTUDO e %d pontos em relacao a sua vida SOCIAL.  \n", protagonista.saude, protagonista.dinheiro, protagonista.estudo, protagonista.social);
+    printf("\n");
+    printf("Agora, as consequencias da sua pontuacao: \n");
+    printf("\n");
+
+    printf("SAUDE: \n");
+    if(protagonista.saude >= 28){
+        printf("Olha só! Você foi um dos unicos que nao ficou doente nesse inverno e foi atleta destaque da CAAP!\n");
+    } else if (protagonista.saude < 28 && protagonista.saude >= 14){
+        printf("Voce teve uma gripe leve, porem teve que faltar dos treinos da atletica da semana.\n");
+    } else if (protagonista.saude < 14&& protagonista.saude>=0){
+        printf("Ops... voce pegou sarampo no campus de SBC \n");
+    }
+printf("\n");
+    printf("DINHEIRO: \n");
+    if(protagonista.dinheiro >= 37){
+        printf("Boa! Voce conseguiu pagar o aluguel da rep, suas contas e ainda sobrou dinheiro! \n");
+    } else if (protagonista.dinheiro < 37 && protagonista.dinheiro >= 18){
+        printf("Voce conseguiu pagar as contas, mas nao sobrou nada.\n");
+    } else if (protagonista.dinheiro < 18 && protagonista.dinheiro>=0){
+        printf("Voce ficou devendo o aluguel da rep. \n");
+        }else if (protagonista.dinheiro < 0){
+        printf("Voce teve que pedir dinheiro empretado aos seus amigos para passar o mes");
+        }
+
+printf("\n");
+    printf("ESTUDO: \n");
+    if(protagonista.estudo >= 44){
+        printf("Parebens! Voce fechou todas as materias com A!\n");
+    } else if (protagonista.estudo < 44 && protagonista.estudo >= 22){
+        printf("Voce passou em todas as materias, porem apenas com notas C e D \n");
+    } else if (protagonista.estudo < 22 && protagonista.estudo>=0){
+        printf("Voce reprovou uma materia e passou com D nas outras \n");
+        }else if (protagonista.estudo < 0){
+        printf("Voce tirou F em todas as materias");
+        }
+printf("\n");
+    printf("SOCIAL: \n");
+    if(protagonista.social >= 13){
+        printf("Ual, voce foi o centro das atencoes no Agacaiu! \n");
+    } else if (protagonista.social < 13 && protagonista.social >= 0){
+        printf("Conseguiu se enturmar e fazer amizade na sala de aula nova.\n");
+    }else if (protagonista.social < 0){
+        printf("Vixe, seus amigos marcaram um role no Sinucao e nao te chamaram. \n");
+        }
+
+printf("\n");
+    //final prova:
     //Se nota = 0 -> reprosvou as duas / nota = 1 -> passou em uma / se nota = 2 -> Passou nas duas
+    printf("E por fim, o resultado das PROVAS: \n");
+    if(protagonista.nota == 0){
+        printf("Voce reprovou nas duas provas. \n");
+    } else if(protagonista.nota == 1){
+        printf("Você passou em apenas uma prova. \n");
+    } else if(protagonista.nota == 2){
+        printf("Parabens! Voce passou nas duas provas! \n");
+    }
+printf("\n");
 }
 
 //Exibe a tela de início
