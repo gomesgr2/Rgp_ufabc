@@ -345,7 +345,223 @@ void Salvar(){
 }
 
 //Ações nos dias comuns
+void atividade(){
+    char ativ;
+    printf("Praticou alguma atividade fisica? (s ou n) \n");
+    scanf(" %c", &ativ);
+      if(ativ == 's'){
+        protagonista.saude += 2;
+        protagonista.energia -=1;
+        printf("Voce ganhou 2 pontos! \n");
+        } else if (ativ == 'n'){
+            printf("Sem alteracao na pontuacao. \n");
+            } else{
+               printf("Resposta invalida! Por favor, responda com 's' em caso afirmativo ou com 'n' em caso negativo.\n");
+               criarlinha(34);
+               atividade();
+               }
+ printf("\n");
+}
+
+void agua(){
+    char agu;
+    printf("Bebeu 2L ou mais de agua? (s ou n)\n");
+    scanf(" %c", &agu);
+    if(agu == 's'){
+        protagonista.saude += 3;
+        protagonista.energia -=1;
+        printf("Voce ganhou 3 pontos! \n");
+        } else if (agu == 'n'){
+              printf("Sem alteracao na pontuacao. \n");
+              } else{
+                 printf("Resposta invalida! Por favor, responda com 's' em caso afirmativo ou com 'n' em caso negativo.\n");
+                 printf("As perguntas serao recomecadas: \n");
+                 criarlinha(34);
+                 agua();
+                 }
+ printf("\n");
+}
+
+void sono(){
+    char son;
+    printf("Teve de 7 a 9 horas de sono? (s ou n) \n");
+    scanf(" %c", &son);
+    if(son == 's'){
+        protagonista.saude += 4;
+        protagonista.energia -=1;
+        printf("Voce ganhou 4 pontos! \n");
+        } else if (son == 'n'){
+            printf("Sem alteracao na pontuacao. \n");
+            }else {
+              printf("Resposta invalida! Por favor, responda com 's' em caso afirmativo ou com 'n' em caso negativo.\n");
+              printf("As perguntas serao recomecadas: \n");
+              criarlinha(34);
+              sono();
+              }
+ printf("\n");
+}
+
+void compra(){
+    char comp;
+    printf("Esta trabalhando regularmente? \n");
+    scanf(" %c", &comp);
+    if(comp == 's'){
+        protagonista.dinheiro += 5;
+        protagonista.energia -=1;
+        printf("Voce ganhou 5 pontos! \n");
+        } else if (comp == 'n'){
+            printf("Sem alteracao na pontuacao. \n");
+        }else{
+            printf("Resposta invalida! Por favor, responda com 's' em caso afirmativo ou com 'n' em caso negativo.\n");
+            printf("As perguntas serao recomecadas: \n");
+            criarlinha(34);
+            compra();
+            }
+ printf("\n");
+}
+
+void gasto(){
+    char imp;
+    printf("Esta ganhando uma renda extra? \n");
+    scanf(" %c", &imp);
+    if(imp == 's'){
+        protagonista.dinheiro += 4;
+        protagonista.energia -=1;
+        printf("Voce ganhou 4 pontos! \n");
+        } else if (imp == 'n'){
+            printf("Sem alteracao na pontuacao. \n");
+            }else{
+            printf("Resposta invalida! Por favor, responda com 's' em caso afirmativo ou com 'n' em caso negativo.\n");
+            printf("As perguntas serao recomecadas: \n");
+            criarlinha(34);
+            gasto();
+            }
+ printf("\n");
+}
+
+void mensagem(){
+    char msg;
+     printf("Teve uma troca de mensagens legal com alguem? \n");
+    scanf(" %c", &msg);
+    if(msg == 's'){
+        protagonista.social += 3;
+        protagonista.energia -=1;
+        printf("Voce ganhou 3 pontos! \n");
+        } else if (msg == 'n'){
+            printf("Sem alteracao na pontuacao. \n");
+            } else {
+            printf("Resposta invalida! Por favor, responda com 's' em caso afirmativo ou com 'n' em caso negativo.\n");
+            printf("As perguntas serao recomecadas: \n");
+            criarlinha(34);
+            mensagem();
+            }
+ printf("\n");
+}
+
+void redes(){
+    char rede;
+    printf("Interagiu nas redes sociais \n");
+    scanf(" %c", &rede);
+    if(rede == 's'){
+        protagonista.social += 2;
+        protagonista.energia -=1;
+        printf("Voce ganhou 2 pontos! \n");
+        } else if (rede == 'n'){
+            printf("Sem alteracao na pontuacao. \n");
+            } else {
+            printf("Resposta invalida! Por favor, responda com 's' em caso afirmativo ou com 'n' em caso negativo.\n");
+            printf("As perguntas serao recomecadas: \n");
+            criarlinha(34);
+            redes();
+            }
+ printf("\n");
+}
+
+void hoje(){
+    char est1;
+    printf("Voce estudou hoje? \n");
+    scanf(" %c", &est1);
+    if(est1 == 's'){
+        protagonista.estudo += 4;
+        protagonista.energia -=1;
+        printf("Voce ganhou 4 pontos! \n");
+        } else if (est1 == 'n'){
+            printf("Sem alteracao na pontuacao. \n");
+            } else {
+            printf("Resposta invalida! Por favor, responda com 's' em caso afirmativo ou com 'n' em caso negativo.\n");
+            printf("As perguntas serao recomecadas: \n");
+            criarlinha(34);
+            hoje();
+            }
+ printf("\n");
+}
+
+void curso(){
+    char est2;
+    printf("Estudou algum(a) curso/materia extracurricular? \n");
+    scanf(" %c", &est2);
+    if(est2 == 's'){
+        protagonista.estudo += 2;
+        protagonista.energia -=1;
+        printf("Voce ganhou 2 pontos! \n");
+        } else if (est2 == 'n'){
+            printf("Sem alteracao na pontuacao. \n");
+            } else {
+            printf("Resposta invalida! Por favor, responda com 's' em caso afirmativo ou com 'n' em caso negativo.\n");
+            printf("As perguntas serao recomecadas: \n");
+            criarlinha(34);
+            curso();
+            }
+ printf("\n");
+}
+
+void meta(){
+    char est3;
+    printf("Cumpriu sua meta de estudos do dia? \n");
+    scanf(" %c", &est3);
+    if(est3 == 's'){
+        protagonista.estudo += 3;
+        protagonista.energia -=1;
+        printf("Voce ganhou 3 pontos! \n");
+        } else if (est3 == 'n'){
+            printf("Sem alteracao na pontuacao. \n");
+        } else {
+            printf("Resposta invalida! Por favor, responda com 's' em caso afirmativo ou com 'n' em caso negativo.\n");
+            printf("As perguntas serao recomecadas: \n");
+            criarlinha(34);
+            meta();
+            }
+ printf("\n");
+}
+
 void AcoesDias(){
+
+    char s, n;
+
+    printf("Responda com 's' caso voce tenha feito aquela acao ou 'n' caso voce nao tenha a feito: \n");
+    printf("\n");
+
+    printf("Acoes relacionadas a saude: \n");
+    printf("\n");
+    atividade(s,n);
+    agua(s,n);
+    sono(s,n);
+
+    printf("Acoes relacionadas ao dinheiro: \n");
+    printf("\n");
+    compra(s,n);
+    gasto(s,n);
+
+    printf("Acoes relacionadas a vida social: \n");
+    printf("\n");
+    mensagem(s,n);
+    redes(s,n);
+
+    printf("Acoes relacionadas ao estudo: \n");
+    printf("\n");
+    hoje(s,n);
+    curso(s,n);
+    meta(s,n);
 
 }
 
