@@ -540,6 +540,7 @@ void AcoesDias(){
 
     char s, n;
 
+    if(0<protagonista.energia && protagonista.energia<=10){
     printf("Responda com 's' caso voce tenha feito aquela acao ou 'n' caso voce nao tenha a feito: \n");
     printf("\n");
 
@@ -564,6 +565,10 @@ void AcoesDias(){
     hoje(s,n);
     curso(s,n);
     meta(s,n);
+ }else {
+     printf("Voce nao tem energia suficiente para realizar esta acao");
+     printf("Sem alteracao na pontuacao. \n");
+     }
 
 }
 
