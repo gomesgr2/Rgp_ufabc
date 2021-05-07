@@ -234,6 +234,8 @@ void ItemDias(){
         ItemDias();
         break;
     }
+	
+	protagonista.energia--;
 
 }
 
@@ -632,7 +634,7 @@ void Prova(int dia){
 void itemprova(){
     int aux;
 
-    if (qtd_itens(protagonista.listaitem) < 0) {
+    if (qtd_itens(protagonista.listaitem) <= 0) {
         printf("Voce nao tem nenhum item!\n");
     } else {
         ler_lista(protagonista.listaitem);
@@ -640,8 +642,37 @@ void itemprova(){
         printf("Que item voce quer utilizar?\n");
         fflush(stdin);
         scanf("%d", &aux);
-    
+
+        Item *no;
+	    no = *protagonista.listaitem;
+
+        for (int i = 0; i < aux; i++) {
+            if (no == NULL) {
+                break;
+            } else {
+                no = no->p;
+            }
+	    }
+
+        //if (no->palavra == "Cafe (+2 de energia)") {
         
+        if (strcmp(no->palavra, "Cafe (+2 de energia)") == 0) {
+            protagonista.energia += 3;
+            remover_elemento(protagonista.listaitem, "Cafe (+2 de energia)");
+        } else if (strcmp(no->palavra, "Barrinha de cereal (+5 de energia)") == 0) {
+            protagonista.energia += 6;
+            remover_elemento(protagonista.listaitem, "Barrinha de cereal (+5 de energia)");
+        } else if (strcmp(no->palavra, "Livro didatico (+3 de estudo)") == 0) {
+            protagonista.estudo += 3;
+            remover_elemento(protagonista.listaitem, "Livro didatico (+3 de estudo)");
+        } else if (strcmp(no->palavra, "Folha de resposta (+10 de ... estudo?)") == 0) {
+            protagonista.estudo += 10;
+            remover_elemento(protagonista.listaitem, "Folha de resposta (+10 de ... estudo?)");
+        } else {
+            printf("0");
+        }
+
+        printf("Voce usou o item! \n");
     }
 }
 
